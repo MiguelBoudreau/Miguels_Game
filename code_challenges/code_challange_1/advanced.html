@@ -7,47 +7,58 @@
 .box{
     width: 50px;
     height: 50px;
+    background-color: blue;
 }
 
+
 </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script type="text/javascript">
+        const box = document.querySelector('.box');
 
-<div class="box"></div>
-
-<script type="text/javascript">
-
-//I need to step1: generate two random hex codes
-//store the value of those hex codes
-//apply the value of those hex codes to box
-const box = document.querySelector('.box');
-
-function getRandInt(min = 1, max = 100){
-            //min and max have default values
-            return Math.floor(Math.random() * (max - min) ) + min;
+        
+        
+        //generate random whole number
+        function getRandInt(min = 1, max = 100){
+        //min and max have default values
+        return Math.floor(Math.random() * (max - min) ) + min;
         }
-    function genHex(){
-                let hexValues = '0123456789ABCDEF';
-                hexValues = hexValues.split('')
 
-                let val1 = '#';
-
-                for(let i = 0; i < 6; i++){
-                    let val2 = hexValues[getRandInt(0,15)];
-                    val1 += val2;
-
-                }
-                return hexColor;
-
-                
+        function genHex(){
+            let hexValues = '0123456789ABCDEF'; //this is a string of valid characters for hex(color) values
+            hexValues = hexValues.split('')
+            // console.log(hexValues);
+            let hexColor = '#';
+                // console.log(hexColor);
             }
-    function hexColor(){
-        if( box.style.backgroundColor == "val1"){
-        if( box.style.backgroundColor = "val2");
-        }else{
-            box.style.backgroundColor = "val1"
+        function val1(){
+            for(let i = 0; i < 6; i++){
+                let val1 = hexValues[getRandInt(0,15)];
+                hexColor += val1;
+            }
+            return val1;
+            }   
+            function val2(){
+            for(let i = 0; i < 6; i++){
+                let val2 = hexValues[getRandInt(0,15)];
+                hexColor += val2;
+            }
+            return val2;
+            }
 
+        function colorChange(){
+            if( box.style.backgroundColor == 'val1'){
+                box.style.backgroundColor = 'val2';
+
+            }else{
+                box.style.backgroundColor = 'val1'
+            }
         }
-    }
-    box.onclick = hexColor;
     
 
-</script>
+        box.onclick = colorChange;
+        // alert('activated');
+    </script>
+</body>
