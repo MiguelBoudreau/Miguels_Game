@@ -17,6 +17,8 @@
     <div class="box"></div>
     <script type="text/javascript">
         const box = document.querySelector('.box');
+        let value1 = 'rgb('+getRandomInt(0,255)+', '+getRandomInt(0,255)+', '+getRandomInt(0,255)+')';
+        let value1 = 'rgb('+getRandomInt(0,255)+', '+getRandomInt(0,255)+', '+getRandomInt(0,255)+')';
 
         function colorChange(){
             if( box.style.backgroundColor == 'red'){
@@ -25,6 +27,12 @@
             }else{
                 box.style.backgroundColor = 'red';
             }
+        }
+
+        //generate random whole number
+        function getRandInt(min = 1, max = 100){
+        //min and max have default values
+        return Math.floor(Math.random() * (max - min) ) + min;
         }
     
         box.onclick = colorChange;
