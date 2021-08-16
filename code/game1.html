@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dragon Game</title>
+<style type="text/css">
+
+.backdrop{
+    background-color: white;
+    position: absolute;
+    top: 15px;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+    border: 1px solid black;
+}
+
+#pete{
+    position: absolute;
+    background-color: black;
+    top: 500px;
+    left: 50px;
+    width: 50px;
+    height: 80px;
+}
+
+
+
+
+
+
+</style>
+
+</head>
+
+
+
+
+<body>
+    <div class="backdrop">
+        <div id="pete"></div>
+    </div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> 
+<script type="text/javascript">
+    
+    
+    const pete = $('#pete'),
+        backdrop = $('.backdrop');
+
+    let gameRunning = false,
+        speed = 10; 
+
+        const dir = {
+                        up: false,
+                        down: false,
+                        left: false,
+                        right: false
+        }
+
+//event listeners
+$(document).keydown( function(e){
+    if(e.which == 87){
+        dir.up = true;
+    }
+
+    if(e.which == 83){
+        dir.down = true;
+    }
+
+    if(e.which == 65){
+        dir.left = true;
+    }
+
+    if(e.which == 68){
+        dir.right = true;
+    }
+
+
+})
+
+
+
+$(document).keyup( function(e){
+    if(e.which == 87){
+        dir.up = false;
+    }
+
+    if(e.which == 83){
+        dir.down = false;
+    }
+
+    if(e.which == 65){
+        dir.left = false;
+    }
+
+    if(e.which == 68){
+        dir.right = false;
+    }
+    console.log(e.type, dir)
+
+})
+
+function gameLoop(){
+    // console.log('gameLoop');
+    let newTop = 0,
+        newLeft = 0; //start top/left value of our dragon
+
+        if(dir.up){
+            //if true do this code
+            newTop -= speed;
+            console.log(newTop);
+        }
+        if(dir.down){
+            newTop += speed;
+        }
+        if(dir.left){
+            //if true do this code:
+            newLeft -= speed;
+        }
+        if(dir.right){
+            newLeft += speed;
+        }
+
+        let dTop = pete.position().top
+        dLeft = pete.position().left,
+        dWidth = 50,
+        dHeight = 50,
+        sHeight = backdrop.height(),
+        sWidth = backdrop.width();
+
+
+        if(dTop+newTop < 0){
+        newTop = 0;
+        newTop -= dTop;
+    }
+
+    if(dLeft+newLeft < 0){
+        newLeft = 0;
+        newLeft -= dTop;
+    }
+
+    if(dTop+newTop+dHeight > sHeight){
+        newTop = 0;
+        newTop += (sHeight-dHeight-dTop)
+    }
+    if(dLeft+newLeft+dWidth > sWidth){
+        newLeft = 0;
+        newLeft += (sWidth-dWidth-dLeft)
+    }
+
+    pete.css({top:'+='+newTop, left:'+='+newLeft})
+
+    window.requestAnimationFrame(gameLoop);
+
+}
+
+gameLoop();
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
+
+
