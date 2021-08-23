@@ -1,29 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dragon Game</title>
+    <title>Pixel Pete in the Wild West</title>
 <style type="text/css">
 
 .backdrop{
-    background-color: white;
+    background-image: url(images/level_1_bg.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat; 
     position: absolute;
     top: 15px;
-    bottom: 15px;
+    bottom: 5px;
     left: 15px;
     right: 15px;
     border: 1px solid black;
 }
 
 #pete{
+    
     position: absolute;
-    background-color: black;
-    top: 500px;
+    background-image: url(images/pete_animated.png);
+    bottom: 0px;
     left: 50px;
-    width: 50px;
-    height: 80px;
+    width: 27px;
+    height: 50px;
 }
 
+.ground{
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 1200px;
+    height: 20px;
+    /* padding-bottom: */
+    background-image: url(images/ground.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%, auto;
 
+
+}
+
+.wallL{
+    position: absolute;
+    width: 10px;
+    height: 90%;
+    left: 0px;
+    top: 10px;
+}
+
+.wallR{
+    position: absolute;
+    width: 10px;
+    height: 95%;
+    right: 0px;
+    bottom: 0px;
+}
+
+.top{
+    position: absolute;
+    width: 100%;
+    height: 10px;
+}
+
+.bottom{
+    position: absolute;
+    width: 100%;
+    height: 10px;
+}
+
+.box1{
+    position: absolute;
+    bottom: 34px;
+    left: 300px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
 
 
 
@@ -32,13 +87,41 @@
 
 </head>
 
+    <!-- <div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+        <div class="top"></div>
+        <div class="bottom"></div>
+    </div> -->
 
+    <!-- this is the blank template div for boxes and floors -->
 
 
 <body>
     <div class="backdrop">
         <div id="pete"></div>
+        <div id="pickup1"></div>
+
+    <div class="ground">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
     </div>
+
+    <div class="box1">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+
+
+
+    </div>
+
+
+
 
 
 
@@ -50,8 +133,14 @@
     const pete = $('#pete'),
         backdrop = $('.backdrop');
 
+
+
+
     let gameRunning = false,
-        speed = 10; 
+        speed = 10,
+        upspeed = 10,
+        downspeed = 10,
+        jumping = 0;
 
         const dir = {
                         up: false,
@@ -62,13 +151,13 @@
 
 //event listeners
 $(document).keydown( function(e){
-    if(e.which == 87){
-        dir.up = true;
-    }
+    // if(e.which == 87){
+    //     dir.up = true;
+    // }
 
-    if(e.which == 83){
-        dir.down = true;
-    }
+    // if(e.which == 83){
+    //     dir.down = true;
+    // }
 
     if(e.which == 65){
         dir.left = true;
@@ -84,13 +173,13 @@ $(document).keydown( function(e){
 
 
 $(document).keyup( function(e){
-    if(e.which == 87){
-        dir.up = false;
-    }
+    // if(e.which == 87){
+    //     dir.up = false;
+    // }
 
-    if(e.which == 83){
-        dir.down = false;
-    }
+    // if(e.which == 83){
+    //     dir.down = false;
+    // }
 
     if(e.which == 65){
         dir.left = false;
@@ -99,35 +188,32 @@ $(document).keyup( function(e){
     if(e.which == 68){
         dir.right = false;
     }
-    console.log(e.type, dir)
+    // console.log(e.type, dir)
 
 })
 
 function gameLoop(){
-    // console.log('gameLoop');
     let newTop = 0,
-        newLeft = 0; //start top/left value of our dragon
+        newLeft = 0;
 
         if(dir.up){
-            //if true do this code
             newTop -= speed;
-            console.log(newTop);
+            // console.log(newTop);
         }
         if(dir.down){
             newTop += speed;
         }
         if(dir.left){
-            //if true do this code:
             newLeft -= speed;
         }
         if(dir.right){
             newLeft += speed;
         }
 
-        let dTop = pete.position().top
+        let dTop = pete.position().top,
         dLeft = pete.position().left,
         dWidth = 50,
-        dHeight = 50,
+        dHeight = 80,
         sHeight = backdrop.height(),
         sWidth = backdrop.width();
 
@@ -139,7 +225,7 @@ function gameLoop(){
 
     if(dLeft+newLeft < 0){
         newLeft = 0;
-        newLeft -= dTop;
+        newLeft -= dLeft;
     }
 
     if(dTop+newTop+dHeight > sHeight){
@@ -151,9 +237,71 @@ function gameLoop(){
         newLeft += (sWidth-dWidth-dLeft)
     }
 
+  
+
+    $('.backdrop').each(function(){
+		if(recthit(pete, $(this))){
+			//stop left / right movement
+			leftspeed = 10;
+			rightspeed = 10;
+			downspeed = 14;
+		}
+	});
+
+    $('.wallL').each(function(){
+		if(recthit(pete, $(this))){
+			//stop left / right movement
+			// rightspeed = 0;
+            console.log('wallL', pete.position());
+			currLeft = $(this).offset().left - $('.backdrop').offset().left;
+			pete.css({left: currLeft - pete.width()})
+		}
+	});
+
+	$('.wallR').each(function(){
+		if(recthit(pete, $(this))){
+			//stop left / right movement
+			// leftspeed = 0;
+            console.log('wallR');
+			currLeft = ($(this).offset().left) - $('.backdrop').offset().left;
+			pete.css({left: currLeft})
+		}
+	});
+
+    $('.top').each(function(){
+		if(recthit(pete, $(this))){
+			currTop = $(this).offset().top;
+			//console.log(currTop);
+			//stop down
+			clearInterval(jumpInterval);
+			dir.up = false;
+			dir.down = true;
+			upspeed = 0;
+			jumping = 0;
+			i = true;
+			pete.css({top: currTop-(pete.height()+10)})
+		}
+	});
+	$('.bottom').each(function(){
+		if(recthit(pete, $(this))){
+			//stop up
+			upspeed = 0;
+		}
+	});
+
     pete.css({top:'+='+newTop, left:'+='+newLeft})
 
+
+
+
+
     window.requestAnimationFrame(gameLoop);
+
+
+
+    //control hitzones for boxes, floors and walls
+
+
 
 }
 
@@ -161,10 +309,93 @@ gameLoop();
 
 
 
+    //jump things
+    var jumpInterval;
+    var i = true;
+
+    function jumpspeed(){
+        upspeed = upspeed - 2;
+    };
+
+    function jump(){
+        dir.up = true;
+        dir.down = false;
+        upspeed = 1;
+        jumpInterval = setInterval(jumpspeed, 40);
+    }
+
+    $(document).keydown(function(e){
+        if(e.which == 32){ //spacebar key code
+            jumping = 1; //activates jump
+            if(i != false){
+                jump();
+                i = false;
+            }
+        };
+    });
+
+    function checkspeed(){
+        //console.log( 'upspeed', upspeed);
+        if(upspeed < -14){
+            clearInterval(jumpInterval);
+            upspeed = 0;
+            dir.down = true;
+            dir.up = false;
+            i = true;
+        }
+        window.requestAnimationFrame(checkspeed);
+    }
+    window.requestAnimationFrame(checkspeed);
+
+    let currFrame = 0;
+
+function peteWalking(){
+
+    const frames = [0,1,2,3,4,5];
+        frameWidth = 27;
+
+    let bgPosX = -(frameWidth * frames[currFrame]),
+        bgPosY = 0;
+
+    pete.css({'background-position': bgPosX+'px '+bgPosY+'px'});
+    currFrame++
+
+    if(currFrame == frames.length){
+			currFrame = 0;
+	}	
+}
+
+setInterval(peteWalking, 1000/5);
 
 
 
 
+//hit detection
+function recthit(rectone, recttwo){
+    var r1 = $(rectone);
+    var r2 = $(recttwo);
+    
+    var r1x = r1.offset().left;
+    var r1w = r1.width();
+    var r1y = r1.offset().top;
+    var r1h = r1.height();
+    
+    var r2x = r2.offset().left;
+    var r2w = r2.width();
+    var r2y = r2.offset().top;
+    var r2h = r2.height();
+    
+    if( r1y+r1h < r2y ||
+        r1y > r2y+r2h ||
+        r1x > r2x+r2w ||
+        r1x+r1w < r2x ){
+    	//console.log('false');
+        return false;
+    }else{
+        return true;   
+    }
+    
+}//end function 
 
 
 
