@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<style type="text/css">
+	body{
+		font-family: Verdana,sans-serif;
+	}
+
+#blue{
+	position: absolute;
+	top: 200px;
+	left: 20px;
+	background-color: blue;
+	width: 10%;
+	height: 35px;
+	transform:translate(-50%,-50%);
+}
+
+#red{
+	position: absolute;
+	top: 300px;
+	left: 20px;
+	background-color: red;
+	width: 10%;
+	height: 35px;
+}
+</style>
+
+</head>
+<body>
+
+	<div id="blue"></div>
+	<div id="red"></div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+let blue = document.getElementById('blue');
+const onMouseMove = (e) =>{
+blue.style.width = e.pageX + 'px';
+};
+
+document.addEventListener('mousemove', onMouseMove);
+
+function mouseOver() {
+   document.getElementById('red').style.width = "#blue";
+}
+
+red.onclick = mouseOver;
+
+
+
+
+</script>
+</script>
+</body>
+</html>

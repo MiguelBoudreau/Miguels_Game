@@ -42,30 +42,30 @@
 
 .wallL{
     position: absolute;
-    width: 10px;
-    height: 90%;
+    width: 1px;
+    height: 100%;
     left: 0px;
     top: 10px;
 }
 
 .wallR{
     position: absolute;
-    width: 10px;
-    height: 95%;
+    width: 1px;
+    height: 100%;
     right: 0px;
-    bottom: 0px;
+    top: 10px;
 }
 
 .top{
     position: absolute;
     width: 100%;
-    height: 10px;
+    height: 1px;
 }
 
 .bottom{
     position: absolute;
     width: 100%;
-    height: 10px;
+    height: 1px;
 }
 
 .box1{
@@ -244,7 +244,7 @@ function gameLoop(){
 			//stop left / right movement
 			leftspeed = 10;
 			rightspeed = 10;
-			downspeed = 14;
+			downspeed = 8;
 		}
 	});
 
@@ -274,18 +274,19 @@ function gameLoop(){
 			//console.log(currTop);
 			//stop down
 			clearInterval(jumpInterval);
-			dir.up = false;
+			dir.up = true;
 			dir.down = true;
 			upspeed = 0;
 			jumping = 0;
 			i = true;
-			pete.css({top: currTop-(pete.height()+10)})
-		}
+			pete.css({top: currTop-(pete.height()+20)})
+        }
+
+
 	});
 	$('.bottom').each(function(){
 		if(recthit(pete, $(this))){
 			//stop up
-			upspeed = 0;
 		}
 	});
 
@@ -320,7 +321,7 @@ gameLoop();
     function jump(){
         dir.up = true;
         dir.down = false;
-        upspeed = 1;
+        upspeed = 8;
         jumpInterval = setInterval(jumpspeed, 40);
     }
 
@@ -336,7 +337,7 @@ gameLoop();
 
     function checkspeed(){
         //console.log( 'upspeed', upspeed);
-        if(upspeed < -14){
+        if(upspeed <= 0){
             clearInterval(jumpInterval);
             upspeed = 0;
             dir.down = true;
