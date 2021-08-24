@@ -50,7 +50,7 @@
 
     .top {
         height: 1px;
-        width: 95%;
+        width: 100%;
         margin-bottom: 17px;
     }
 
@@ -59,7 +59,7 @@
     }
 
     .bottom {
-        width: 95%;
+        width: 100%;
         margin: 0 auto;
         height: 1px;
         clear: both;
@@ -70,6 +70,17 @@
 .box1{
     position: absolute;
     bottom: 34px;
+    left: 655px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+.box2{
+    position: absolute;
+    bottom: 34px;
     left: 300px;
     width: 50px;
     height: 50px;
@@ -77,6 +88,86 @@
     background-image: url(images/box.jpg);
     background-repeat: no-repeat, repeat;
     background-size: 100%, auto;
+}
+.box3{
+    position: absolute;
+    bottom: 34px;
+    left: 300px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+.box4{
+    position: absolute;
+    bottom: 34px;
+    left: 300px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+
+.saloon-floor1{
+    position: absolute;
+    background-color: #37301d;
+    height: 5px;
+    width: 348px;
+    left: 276px;
+    bottom: 150px;
+}
+.saloon-floor2{
+    position: absolute;
+    background-color: #37301d;
+    height: 5px;
+    width: 138px;
+    left: 786px;
+    bottom: 150px;
+}
+.saloon-floor3{
+    position: absolute;
+    background-color: #37301d;
+    height: 5px;
+    width: 66px;
+    left: 276px;
+    bottom: 262px;
+}
+.saloon-floor4{
+    position: absolute;
+    background-color: #37301d;
+    height: 5px;
+    width: 480px;
+    left: 442px;
+    bottom: 262px;
+}
+.saloon-floor5{
+    position: absolute;
+    background-color: #37301d;
+    height: 5px;
+    width: 646px;
+    left: 276px;
+    bottom: 374px;
+}
+
+.saloon-wall1{
+    position: absolute;
+    background-color: #37301d;
+    height: 268px;
+    width: 5px;
+    left: 282px;
+    bottom: 112px;
+}
+.saloon-wall2{
+    position: absolute;
+    background-color: #37301d;
+    height: 268px;
+    width: 5px;
+    left: 912px;
+    bottom: 112px;
 }
 
 
@@ -109,6 +200,49 @@
     </div>
 
     <div class="box1">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+
+    <div class="saloon-floor1">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="saloon-floor2">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="saloon-floor3">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="saloon-floor4">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="saloon-floor5">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="saloon-wall1">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="saloon-wall2">
         <div class="top"></div>
         <div class="bottom"></div>
         <div class="wallL"></div>
@@ -246,9 +380,9 @@ console.log('total:', pLeft+newLeft);
 			console.log('backdrop');
 			//top 507
 			//stop left / right movement
-			leftspeed = 10;
-			rightspeed = 10;
-			downspeed = 14;
+			leftspeed = 4;
+			rightspeed = 4;
+			downspeed = 6;
 		}
 	});
 	$('.wallL').each(function(){
@@ -323,7 +457,7 @@ window.requestAnimationFrame(gameLoop);
     function jump(){
         dir.up = true;
         dir.down = false;
-        upspeed = 8;
+        upspeed = 12;
         jumpInterval = setInterval(jumpspeed, 40);
     }
 
