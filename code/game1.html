@@ -131,23 +131,29 @@
     
     
     const pete = $('#pete'),
-        backdrop = $('.backdrop');
+        backdrop = $('.backdrop'),
+        dir = {
+        up: false,
+        down: false,
+        left: false,
+        right: false
+        };
 
 
 
 
     let gameRunning = false,
         speed = 10,
+        jumping = 0,
+        leftspeed = 10,
+        rightspeed = 10, //pixels per frame
         upspeed = 10,
-        downspeed = 10,
-        jumping = 0;
-
-        const dir = {
-                        up: false,
-                        down: false,
-                        left: false,
-                        right: false
-        }
+        downspeed = 10, 
+        //idea: put speeds in an object literal?
+        pHeight = 50,
+        pWidth = 27, 
+        stageH = 590, 
+        stageW = 1200; //we know the values for the player and the stage
 
 //event listeners
 $(document).keydown( function(e){
@@ -212,8 +218,8 @@ function gameLoop(){
 
         let dTop = pete.position().top,
         dLeft = pete.position().left,
-        dWidth = 50,
-        dHeight = 80,
+        dWidth = 27,
+        dHeight = 50,
         sHeight = backdrop.height(),
         sWidth = backdrop.width();
 
@@ -239,72 +245,77 @@ function gameLoop(){
 
   
 
-    $('.backdrop').each(function(){
+	backdrop.each(function(){
+		//this always happens. So these speeds always get set
 		if(recthit(pete, $(this))){
+			console.log('backdrop');
+			//top 507
 			//stop left / right movement
 			leftspeed = 10;
 			rightspeed = 10;
-			downspeed = 8;
+			downspeed = 14;
 		}
 	});
-
-    $('.wallL').each(function(){
+	$('.wallL').each(function(){
 		if(recthit(pete, $(this))){
+			console.log('wallL');
 			//stop left / right movement
 			// rightspeed = 0;
-            console.log('wallL', pete.position());
-			currLeft = $(this).offset().left - $('.backdrop').offset().left;
-			pete.css({left: currLeft - pete.width()})
+			let currLeft = $(this).parent().position().left;
+			//.offset checks against the position of the element vs the document.
+			//currLeft = $(this).offset().left - $('.gameStage').offset().left;
+			$('#pete').css({left: currLeft - pWidth})
 		}
 	});
-
 	$('.wallR').each(function(){
+
 		if(recthit(pete, $(this))){
+			console.log('wallR');
 			//stop left / right movement
 			// leftspeed = 0;
-            console.log('wallR');
-			currLeft = ($(this).offset().left) - $('.backdrop').offset().left;
-			pete.css({left: currLeft})
+//			currLeft = ($(this).offset().left) - $('.gameStage').offset().left;
+			let currLeft = $(this).parent().position().left;
+			$('#pete').css({left: currLeft})
 		}
 	});
-
-    $('.top').each(function(){
+	$('.top').each(function(){
 		if(recthit(pete, $(this))){
-			currTop = $(this).offset().top;
-			//console.log(currTop);
+			console.log('top'); 
+			//was at 507, this reset him to 476, a difference of 31px
+			//at 504 also gets reset to 476, 28px... Orrrrrr.... 14*2
+			//476, 490, 504
+			let currTopP = $(this).parent().position().top; //returns 560  
+			//position does not work here
+			console.log(currTopP)
+			console.log(dir);
 			//stop down
 			clearInterval(jumpInterval);
-			dir.up = true;
+			dir.up = false;
 			dir.down = true;
 			upspeed = 0;
 			jumping = 0;
 			i = true;
-			pete.css({top: currTop-(pete.height()+20)})
-        }
-
-
+//			console.log(dir,'upspeed:', upspeed, ' downspeed:',downspeed, player.position().top) //518
+			$('#pete').css({top: currTopP-pHeight})
+//			console.log(dir,'upspeed:', upspeed, ' downspeed:',downspeed, player.position().top) //476
+		}
 	});
 	$('.bottom').each(function(){
 		if(recthit(pete, $(this))){
 			//stop up
+			upspeed = 0;
+			console.log('bottom');
 		}
 	});
 
-    pete.css({top:'+='+newTop, left:'+='+newLeft})
+	checkspeed();
+	//playersprite(); 
 
+	window.requestAnimationFrame(gameLoop);
 
+};// end game loop
+window.requestAnimationFrame(gameLoop);
 
-
-
-    window.requestAnimationFrame(gameLoop);
-
-
-
-    //control hitzones for boxes, floors and walls
-
-
-
-}
 
 gameLoop();
 
