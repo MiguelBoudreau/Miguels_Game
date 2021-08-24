@@ -6,21 +6,21 @@
 
 .backdrop{
     background-image: url(images/level_1_bg.jpg);
-    background-size: 100%;
-    background-repeat: no-repeat; 
     position: absolute;
     top: 15px;
     bottom: 5px;
     left: 15px;
     right: 15px;
     border: 1px solid black;
+    width: 1200px;
+    height: 590px;
 }
 
 #pete{
     
     position: absolute;
     background-image: url(images/pete_animated.png);
-    bottom: 0px;
+    top: 300px;
     left: 50px;
     width: 27px;
     height: 50px;
@@ -31,42 +31,41 @@
     left: 0px;
     bottom: 0px;
     width: 1200px;
-    height: 20px;
-    /* padding-bottom: */
+    height: 30px;
     background-image: url(images/ground.jpg);
-    background-repeat: no-repeat;
-    background-size: 100%, auto;
-
-
 }
 
-.wallL{
-    position: absolute;
-    width: 1px;
-    height: 100%;
-    left: 0px;
-    top: 10px;
-}
 
-.wallR{
-    position: absolute;
-    width: 1px;
-    height: 100%;
-    right: 0px;
-    top: 10px;
-}
+    .wallL {
+        height: 95%;
+        width: 1px;
+        float: left;
+        margin-bottom: 17px;
+    }
+    .wallR {
+        height: 95%;
+        width: 1px;
+        float: right;
+    }
 
-.top{
-    position: absolute;
-    width: 100%;
-    height: 1px;
-}
+    .top {
+        height: 1px;
+        width: 95%;
+        margin-bottom: 17px;
+    }
 
-.bottom{
-    position: absolute;
-    width: 100%;
-    height: 1px;
-}
+    .ground .top{
+        width: 100%;
+    }
+
+    .bottom {
+        width: 95%;
+        margin: 0 auto;
+        height: 1px;
+        clear: both;
+        position: absolute;
+        bottom: 0;
+    }
 
 .box1{
     position: absolute;
@@ -131,16 +130,13 @@
     
     
     const pete = $('#pete'),
-        backdrop = $('.backdrop'),
-        dir = {
-        up: false,
-        down: false,
-        left: false,
-        right: false
-        };
-
-
-
+          backdrop = $('.backdrop'),
+          dir = {
+            up: false,
+            down: true,
+            left: false,
+            right: false
+            };
 
     let gameRunning = false,
         speed = 10,
@@ -203,47 +199,46 @@ function gameLoop(){
         newLeft = 0;
 
         if(dir.up){
-            newTop -= speed;
+            newTop -= upspeed;
             // console.log(newTop);
         }
         if(dir.down){
-            newTop += speed;
+            newTop += downspeed;
         }
         if(dir.left){
-            newLeft -= speed;
+            newLeft -= leftspeed;
         }
         if(dir.right){
-            newLeft += speed;
+            newLeft += rightspeed;
         }
 
-        let dTop = pete.position().top,
-        dLeft = pete.position().left,
-        dWidth = 27,
-        dHeight = 50,
-        sHeight = backdrop.height(),
-        sWidth = backdrop.width();
+        let pTop = pete.position().top,
+            pLeft = pete.position().left;
 
 
-        if(dTop+newTop < 0){
+        if(pTop+newTop < 0){
         newTop = 0;
-        newTop -= dTop;
-    }
-
-    if(dLeft+newLeft < 0){
+        newTop -= pTop;
+        }
+console.log('total:', pLeft+newLeft);
+    if(pLeft+newLeft < 0){
         newLeft = 0;
-        newLeft -= dLeft;
+        newLeft -= pLeft;
+        console.log('total:', pLeft+newLeft)
     }
+    console.log(newLeft, pLeft);
 
-    if(dTop+newTop+dHeight > sHeight){
+    if(pTop+newTop+pHeight > stageH){
         newTop = 0;
-        newTop += (sHeight-dHeight-dTop)
+        newTop += (stageH-pHeight-pTop)
     }
-    if(dLeft+newLeft+dWidth > sWidth){
+    if(pLeft+newLeft+pWidth > stageW){
         newLeft = 0;
-        newLeft += (sWidth-dWidth-dLeft)
+        newLeft += (stageW-pWidth-pLeft)
     }
 
-  
+//missing pete's css application
+  pete.css({top: '+=' + newTop, left: '+=' + newLeft});
 
 	backdrop.each(function(){
 		//this always happens. So these speeds always get set
@@ -308,17 +303,13 @@ function gameLoop(){
 		}
 	});
 
-	checkspeed();
+	 checkspeed();
 	//playersprite(); 
 
 	window.requestAnimationFrame(gameLoop);
 
 };// end game loop
 window.requestAnimationFrame(gameLoop);
-
-
-gameLoop();
-
 
 
     //jump things
@@ -355,9 +346,7 @@ gameLoop();
             dir.up = false;
             i = true;
         }
-        window.requestAnimationFrame(checkspeed);
     }
-    window.requestAnimationFrame(checkspeed);
 
     let currFrame = 0;
 
@@ -377,7 +366,7 @@ function peteWalking(){
 	}	
 }
 
-setInterval(peteWalking, 1000/5);
+//setInterval(peteWalking, 1000/5);
 
 
 
