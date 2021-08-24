@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pixel Pete in the Wild West</title>
+<style type="text/css">
+
+.backdrop{
+    background-image: url(images/level_1_bg.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat; 
+    position: absolute;
+    top: 15px;
+    bottom: 5px;
+    left: 15px;
+    right: 15px;
+    border: 1px solid black;
+}
+
+#pete{
+    
+    position: absolute;
+    background-image: url(images/pete_animated.png);
+    bottom: 0px;
+    left: 50px;
+    width: 27px;
+    height: 50px;
+}
+
+.ground{
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 1200px;
+    height: 20px;
+    /* padding-bottom: */
+    background-image: url(images/ground.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%, auto;
+
+
+}
+
+.wallL{
+    width: 1px;
+    height: 95%;
+    float: left;
+
+}
+
+.wallR{
+    width: 1px;
+    height: 95%;
+    float: right;
+}
+
+.top {
+        height: 1px;
+        width: 95%;
+        margin: 0 auto;
+        margin-bottom: 17px;
+    }
+.bottom {
+        width: 95%;
+        margin: 0 auto;
+        height: 1px;
+        clear: both;
+    }
+
+.box1{
+    position: absolute;
+    bottom: 34px;
+    left: 300px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+
+
+
+
+</style>
+
+</head>
+
+    <!-- <div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+        <div class="top"></div>
+        <div class="bottom"></div>
+    </div> -->
+
+    <!-- this is the blank template div for boxes and floors -->
+
+
+<body>
+    <div class="backdrop">
+        <div id="pete"></div>
+        <div id="pickup1"></div>
+
+    <div class="ground">
+        <div class="top"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+        <div class="bottom"></div>>
+    </div>
+
+    <div class="box1">
+        <div class="top"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+        <div class="bottom"></div>
+    </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> 
+<script type="text/javascript">
+    
+    
+    const pete = $('#pete'),
+        backdrop = $('.backdrop');
+
+
+
+
+    let gameRunning = false,
+        upspeed = 16,
+        downspeed = 14,
+        jumping = 0,
+        leftspeed = 10,
+        rightspeed = 10,
+        peteTop;
+
+    const dir = {
+                        up: false,
+                        down: true,
+                        left: false,
+                        right: false
+        }
+
+//event listeners
+$(document).keydown( function(e){
+    // if(e.which == 87){
+    //     dir.up = true;
+    // }
+
+    // if(e.which == 83){
+    //     dir.down = true;
+    // }
+
+    if(e.which == 65){
+        dir.left = true;
+    }
+
+    if(e.which == 68){
+        dir.right = true;
+    }
+
+    if(e.which == 32){ //spacebar key code
+        jumping = 1; //activates jump
+        if(i != false){
+            jump();
+            i = false;
+        }
+    }
+
+})
+
+
+
+$(document).keyup( function(e){
+    // if(e.which == 87){
+    //     dir.up = false;
+    // }
+
+    // if(e.which == 83){
+    //     dir.down = false;
+    // }
+
+    if(e.which == 65){
+        dir.left = false;
+    }
+
+    if(e.which == 68){
+        dir.right = false;
+    }
+    // console.log(e.type, dir)
+
+})
+
+function gameLoop(){
+    let newTop = 0,
+        newLeft = 0;
+
+        if(dir.up){
+            newTop -= upspeed;
+            // console.log(newTop);
+        }
+        if(dir.down){
+            newTop += downspeed;
+        }
+        if(dir.left){
+            newLeft -= leftspeed;
+        }
+        if(dir.right){
+            newLeft += rightspeed;
+        }
+
+        let dTop = pete.position().top,
+        dLeft = pete.position().left,
+        dWidth = 27,
+        dHeight = 50,
+        sHeight = backdrop.height(),
+        sWidth = backdrop.width();
+
+
+        if(dTop+newTop < 0){
+        newTop = 0;
+        newTop -= dTop;
+    }
+
+    if(dLeft+newLeft < 0){
+        newLeft = 0;
+        newLeft -= dLeft;
+    }
+
+    if(dTop+newTop+dHeight > sHeight){
+        newTop = 0;
+        newTop += (sHeight-dHeight-dTop)
+    }
+    if(dLeft+newLeft+dWidth > sWidth){
+        newLeft = 0;
+        newLeft += (sWidth-dWidth-dLeft)
+    }
+
+    pete.css({top: '+=' + newTop, left: '+=' + newLeft});  
+
+    $('.backdrop').each(function(){
+		if(recthit(pete, $(this))){
+			//stop left / right movement
+			leftspeed = 10;
+			rightspeed = 10;
+			downspeed = 14;
+		}
+	});
+
+    console.log()
+
+    $('.wallL').each(function(){
+		if(recthit(pete, $(this))){
+			//stop left / right movement
+			// rightspeed = 0;
+            console.log('wallL');
+			currLeft = $(this).offset().left - $('.backdrop').offset().left;
+            //currLeft on the box is 301 vs 280 on position = 21px difference
+            //console.log(currLeft +','+ pete.position().left)
+			pete.css({left: currLeft - pete.width()})
+		}
+	});
+
+	$('.wallR').each(function(){
+		if(recthit(pete, $(this))){
+			//stop left / right movement
+			// leftspeed = 0;
+            console.log('wallR');
+			currLeft = ($(this).offset().left) - $('.backdrop').offset().left;
+			pete.css({left: currLeft})
+		}
+	});
+
+    $('.top').each(function(){
+        if(recthit(pete, $(this))){
+ //           console.log('TOP', dir );
+            currTop = $(this).offset().top;
+ //           console.log('top:',currTop);
+            //stop down
+            clearInterval(jumpInterval);
+            dir.up = false;
+            dir.down = false;
+            upspeed = 0;
+            jumping = 0;
+            downspeed = 0;
+            i = true;
+            //pete.css({top: currTop-(pete.height()*2)})
+        }else{
+            dir.down = true;
+        }
+    });
+
+
+
+	$('.bottom').each(function(){
+		if(recthit(pete, $(this))){
+			//stop up
+			upspeed = 0;
+		}
+	});
+
+      console.log('up', upspeed, 'down', downspeed);
+
+    checkspeed();
+
+
+
+    window.requestAnimationFrame(gameLoop);
+
+
+
+    //control hitzones for boxes, floors and walls
+
+
+
+}
+
+gameLoop();
+
+
+
+    //jump things
+    var jumpInterval;
+    var i = true;
+
+    function jumpspeed(){
+        upspeed = upspeed - 2;
+    };
+
+    function jump(){
+        console.log('jump');
+        dir.up = true;
+        dir.down = false;
+        upspeed = 16;
+        jumpInterval = setInterval(jumpspeed, 40);
+    }
+
+    $(document).keydown(function(e){
+
+    });
+
+    function checkspeed(){
+        console.log( 'upspeed', upspeed);
+        if(upspeed < -14){
+            clearInterval(jumpInterval);
+            upspeed = 0;
+            dir.down = false;
+            dir.up = false;
+            i = true;
+        }
+    }
+
+    let currFrame = 0;
+
+function peteWalking(){
+
+    const frames = [0,1,2,3,4,5];
+        frameWidth = 27;
+
+    let bgPosX = -(frameWidth * frames[currFrame]),
+        bgPosY = 0;
+
+    pete.css({'background-position': bgPosX+'px '+bgPosY+'px'});
+    currFrame++
+
+    if(currFrame == frames.length){
+			currFrame = 0;
+	}	
+}
+
+setInterval(peteWalking, 1000/5);
+
+
+
+
+//hit detection
+function recthit(rectone, recttwo){
+    var r1 = $(rectone);
+    var r2 = $(recttwo);
+    
+    var r1x = r1.offset().left;
+    var r1w = r1.width();
+    var r1y = r1.offset().top;
+    var r1h = r1.height();
+    
+    var r2x = r2.offset().left;
+    var r2w = r2.width();
+    var r2y = r2.offset().top;
+    var r2h = r2.height();
+    
+    if( r1y+r1h < r2y ||
+        r1y > r2y+r2h ||
+        r1x > r2x+r2w ||
+        r1x+r1w < r2x ){
+    	//console.log('false');
+        return false;
+    }else{
+        return true;   
+    }
+    
+}//end function 
+
+
+
+
+
+
+</script>
+</body>
+</html>
+
+
