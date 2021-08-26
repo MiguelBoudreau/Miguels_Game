@@ -191,6 +191,16 @@
     bottom: 112px;
 }
 
+.boss1{
+    background-color: red;
+    position: absolute;
+    right: 0;
+    bottom: 30px;
+    width: 50px;
+    height: 80px;
+
+}
+
 
 
 
@@ -212,6 +222,7 @@
     <div class="backdrop">
         <div id="pete"></div>
         <div class="gun1"></div>
+        <div class="boss1"></div>
 
     <div class="ground">
         <div class="top"></div>
@@ -306,13 +317,17 @@
     
     const pete = $('#pete'),
           backdrop = $('.backdrop'),
+          revolver = $('.revolver'),
+          leverAction = $('.lever-action'),
+          shotgun = $('.shotgun'),
+          rifle = $('.rifle'),
           dir = {
             up: false,
             down: true,
             left: false,
             right: false
             }
-            weapons = [];
+            weapons = ['revolver'];
 
     let gameRunning = false,
         speed = 10,
@@ -355,7 +370,7 @@ $(document).keydown( function(e){
         };
 })
 
-
+    
 
 $(document).keyup( function(e){
     // if(e.which == 87){
@@ -490,6 +505,13 @@ function gameLoop(){
             $(this).remove();
             weapons.push('gun1');
             console.log(weapons);
+        }
+    });
+
+    $('.boss1').each( function(){
+        if(recthit(pete, $(this))){
+            $(backdrop).remove();
+            console.log('start boss battle')
         }
     });
 

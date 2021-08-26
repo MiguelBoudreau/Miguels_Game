@@ -16,6 +16,11 @@
     height: 590px;
 }
 
+button{
+    height: 100px;
+    width: 150px;
+    background-color: #FFFFFF;
+}
 #pete{
     
     position: absolute;
@@ -35,13 +40,17 @@
     background-image: url(images/ground.jpg);
 }
 
-.gun2{
+.gun1{
     height: 25px;
     width: 150px;
     position: absolute;
     background-image: url(images/lever_action.png);
     left: 750px;
     bottom: 278px;
+}
+
+.gun2{
+
 }
 
 .gun3{
@@ -187,6 +196,16 @@
     bottom: 112px;
 }
 
+.boss1{
+    background-color: red;
+    position: absolute;
+    right: 0;
+    bottom: 30px;
+    width: 50px;
+    height: 80px;
+
+}
+
 
 
 
@@ -204,9 +223,16 @@
     <!-- this is the blank template div for boxes and floors -->
 
 
-<body>
 
 
+<div class="battle-backdrop1">
+    <div class="screen"></div>
+    <button class="revolver"><p>ammo: 6</p></button>
+    <button class="lever-action"><p>ammo: 8</p></button>
+    <button class="shotgun"><p>ammo: 4</p></button>
+    <button class="rifle"><p>ammo: 1</p></button>
+
+</div>
 
 
 
@@ -216,9 +242,45 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> 
 <script type="text/javascript">
     
-weapons = ['.gun1']
+    
+    const pete = $('#pete'),
+          backdrop = $('.backdrop'),
+          dir = {
+            up: false,
+            down: true,
+            left: false,
+            right: false
+            }
+            weapons = ['revolver'];
 
 
+            let gameRunning = false,
+        speed = 10,
+        jumping = 0,
+        leftspeed = 10,
+        rightspeed = 10, //pixels per frame
+        upspeed = 10,
+        downspeed = 10, 
+        //idea: put speeds in an object literal?
+        pHeight = 50,
+        pWidth = 27, 
+        stageH = 590, 
+        stageW = 1200; //we know the values for the player and the stage
+
+
+        function gameLoop(){
+    let newTop = 0,
+        newLeft = 0;
+
+    $('.revolver').onclick( function(){
+        if(revolver Math)
+    })
+
+        
+	window.requestAnimationFrame(gameLoop);
+
+};// end game loop
+window.requestAnimationFrame(gameLoop);
 
 </script>
 </body>
