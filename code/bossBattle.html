@@ -40,7 +40,7 @@ button{
     background-image: url(images/ground.jpg);
 }
 
-.gun1{
+div.gun1{
     height: 25px;
     width: 150px;
     position: absolute;
@@ -226,19 +226,16 @@ button{
 
 
 <div class="battle-backdrop1">
-    <div class="screen"></div>
-    <button class="revolver"><p>ammo: 6</p></button>
-    <button class="lever-action"><p>ammo: 8</p></button>
-    <button class="shotgun"><p>ammo: 4</p></button>
-    <button class="rifle"><p>ammo: 1</p></button>
-
+    <div class="screen">
+        <!--characters to be displayed here -->
+    </div>
+    <div class="ui">
+        <button class="revolver"><p>ammo: <span>6</span></p></button>
+        <button class="gun1"><p>ammo: <span>8</span></p></button>
+        <button class="shotgun"><p>ammo: <span>4</span></p></button>
+        <button class="rifle"><p>ammo: <span>1</span></p></button>
+    </div>
 </div>
-
-
-
-
-
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> 
 <script type="text/javascript">
     
@@ -251,10 +248,10 @@ button{
             left: false,
             right: false
             }
-            weapons = ['revolver'];
+            weapons = ['revolver', 'gun1'];
 
 
-            let gameRunning = false,
+    let gameRunning = false,
         speed = 10,
         jumping = 0,
         leftspeed = 10,
@@ -267,20 +264,55 @@ button{
         stageH = 590, 
         stageW = 1200; //we know the values for the player and the stage
 
-
-        function gameLoop(){
-    let newTop = 0,
-        newLeft = 0;
-
-    $('.revolver').onclick( function(){
-        if(revolver Math)
-    })
-
+$('.ui button').on( 'click', function(e){
+        const button = $(this); //the button that got clicked:
+        let randomPerc = getRandInt(1,100), //gets the percent that the user generates
+            revolverPerc = 65 > randomPerc, 
+            //if 66 is less than randomPerc then revolverPerc is true
+            gun1Perc = 80 > randomPerc,
+            bClass = button.attr('class'),
+            ammo = button.find('span').text()*1; //*1 converts string to number
+            console.log(ammo);
+            ammo--;
+            if(ammo == 0){
+                $(this).off();
+            }
+            
+            button.find('span').text(ammo);
         
-	window.requestAnimationFrame(gameLoop);
+            switch(bClass){
+                case 'revolver':
+                if(revolverPerc){
+                    console.log('player hit');
+                }else{
+                    console.log('player miss');
+                }
+                //subtract ammo from box.
+                break;
 
-};// end game loop
-window.requestAnimationFrame(gameLoop);
+                case 'gun1':
+                if(gun1Perc){
+                    console.log('player hit');
+                }else{
+                    console.log('player miss');
+                }
+                //subtract ammo from box.
+                break;
+
+
+
+            }
+
+})
+
+
+
+        //generate whole number:
+        function getRandInt(min = 1, max = 100){
+            //min and max have default values
+            return Math.floor(Math.random() * (max - min) ) + min;
+        }
+
 
 </script>
 </body>
