@@ -241,14 +241,25 @@ div.gun1{
     
     
     const pete = $('#pete'),
-          backdrop = $('.backdrop'),
-          dir = {
-            up: false,
-            down: true,
-            left: false,
-            right: false
+          backdrop = $('.battle-backdrop1'),
+          urlParam = getUrlVars()["weapons"];
+    
+          let weapons = urlParam.split('+');
+          console.log(weapons);
+
+          $('.ui button').each( function(){
+            let button = $(this);
+            console.log(button);
+            let gunClass = button.attr('class')
+            if(weapons.indexOf(gunClass) == -1){
+                button.hide();
+                console.log('not found')
+            }else{
+                console.log('found')
             }
-            weapons = ['revolver', 'gun1'];
+
+          })
+
 
 
     let gameRunning = false,
@@ -314,6 +325,17 @@ $('.ui button').on( 'click', function(e){
                 alert('You beat him!');
              }   
 })
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    console.log(m);
+    vars[key] = value;
+  
+    });
+    //console.log(vars);
+    return vars;
+}
 
 
 

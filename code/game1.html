@@ -510,8 +510,11 @@ function gameLoop(){
 
     $('.boss1').each( function(){
         if(recthit(pete, $(this))){
-            $(backdrop).remove();
+            //backdrop.text('');
+            urlParam = weapons.join('+')
+            console.log(urlParam);
             console.log('start boss battle')
+            location.replace('bossBattle.html?weapons='+urlParam);
         }
     });
 
