@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Code Challenge 5</title>
+<style type="text/css">
+	body{
+		font-family: Verdana,sans-serif;
+
+	}
+
+	div.time{
+		display: flex;
+	}
+
+	div.ampm{
+		margin: 0 0 0 5px;
+	}
+
+
+</style>
+
+</head>
+<body>
+
+	<div class="time">
+		<div class="hours"></div>
+		<div>:</div>
+		<div class="mins"></div>
+		<div>:</div>
+		<div class="secs"></div>
+		<div class="ampm"></div>
+	</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+let day = new Date(); 
+
+function clock(){
+	day = new Date();
+
+	//today.setHours(20);
+		
+let cSecs = day.getSeconds(),
+	cMins = day.getMinutes(),
+	cHour = day.getHours(),
+	ampm = 'PM';
+
+	if(cHour < 12){
+		ampm = 'AM';
+	}else{
+		cHour -= 12;
+		ampm = 'PM';
+	}
+
+	if(cHour == 0){
+		cHour = 12;
+	}
+
+	if(cHour < 10){
+		cHour = '0'+cHour;
+	}
+
+	if(cMins < 10){
+		cMins = '0'+cMins;
+	}
+
+	if(cSecs < 10){
+		cSecs = '0'+cSecs;
+	}
+
+	if(cHour > 6){
+	}
+
+	if(cHour < 18){
+	}
+
+	$('.hours').text(cHour);
+	$('.mins').text(cMins);
+	$('.secs').text(cSecs);
+	$('.ampm').text(ampm);
+	
+	window.requestAnimationFrame(clock);
+}
+
+clock();
+
+
+
+
+</script>
+</script>
+</body>
+</html>
