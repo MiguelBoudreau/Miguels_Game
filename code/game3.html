@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pixel Pete in the Wild West</title>
+<style type="text/css">
+
+.backdrop{
+    background-image: url(images/level_3_bg.jpg);
+    position: absolute;
+    top: 15px;
+    bottom: 5px;
+    left: 15px;
+    right: 15px;
+    border: 1px solid black;
+    width: 1200px;
+    height: 590px;
+}
+
+#pete{
+    
+    position: absolute;
+    background-image: url(images/pete_animated.png);
+    top: 300px;
+    left: 50px;
+    width: 27px;
+    height: 50px;
+}
+
+.ground{
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 1200px;
+    height: 30px;
+    background-image: url(images/ground3.jpg);
+}
+
+.rifle{
+    height: 25px;
+    width: 150px;
+    position: absolute;
+    background-image: url(images/elephant_rifle.png);
+    left: 586px;
+    bottom: 46px;
+}
+
+
+
+    .wallL {
+        height: 95%;
+        width: 1px;
+        float: left;
+        margin-left: 17px;
+    }
+    .wallR {
+        height: 95%;
+        width: 1px;
+        float: right;
+        margin-right: 17px;
+    }
+
+    .top {
+        height: 1px;
+        width: 100%;
+        margin-bottom: 17px;
+    }
+
+    .ground .top{
+        width: 100%;
+    }
+
+    .bottom {
+        width: 100%;
+        margin: 0 auto;
+        height: 1px;
+        clear: both;
+        position: absolute;
+        bottom: 0;
+    }
+
+
+.box2{
+    position: absolute;
+    bottom: 22px;
+    left: 210px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+.box3{
+    position: absolute;
+    bottom: 22px;
+    left:266px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+.box4{
+    position: absolute;
+    bottom: 72px;
+    left: 246px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+.box4{
+    position: absolute;
+    bottom: 72px;
+    left: 246px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+.box5{
+    position: absolute;
+    bottom: 172px;
+    left: 454px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+.box6{
+    position: absolute;
+    bottom: 222px;
+    left: 454px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+.box7{
+    position: absolute;
+    bottom: 172px;
+    left: 504px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+.box8{
+    position: absolute;
+    bottom: 222px;
+    left: 504px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+.box9{
+    position: absolute;
+    bottom: 272px;
+    left: 504px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+.box10{
+    position: absolute;
+    bottom: 322px;
+    left: 504px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+.box11{
+    position: absolute;
+    bottom: 172px;
+    left: 710px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+.box12{
+    position: absolute;
+    bottom: 222px;
+    left: 710px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+.box13{
+    position: absolute;
+    bottom: 272px;
+    left: 710px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+.box14{
+    position: absolute;
+    bottom: 172px;
+    left: 760px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+.box15{
+    position: absolute;
+    bottom: 172px;
+    left: 810px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+.box16{
+    position: absolute;
+    bottom: 222px;
+    left: 790px;
+    width: 50px;
+    height: 50px;
+    /* padding-bottom: */
+    background-image: url(images/box.jpg);
+    background-repeat: no-repeat, repeat;
+    background-size: 100%, auto;
+}
+
+.mill-floor1{
+    position: absolute;
+    background-color: #543a47;
+    height: 28px;
+    width: 190px;
+    left: 418px;
+    bottom: 148px;
+}
+.mill-floor2{
+    position: absolute;
+    background-color: #543a47;
+    height: 28px;
+    width: 200px;
+    left: 702px;
+    bottom: 148px;
+}
+.mill-floor3{
+    position: absolute;
+    background-color: #2d8f9c;
+    height: 15px;
+    width: 432px;
+    left: 0px;
+    bottom: 478px;
+}
+.mill-floor4{
+    position: absolute;
+    background-color: #2d8f9c;
+    height: 15px;
+    width: 386px;
+    right: 0px;
+    bottom: 478px;
+}
+.mill-wall1{
+    position: absolute;
+    background-color: #543a47;
+    height: 120px;
+    width: 26px;
+    left: 548px;
+    bottom: 28px;
+}
+
+
+.boss1{
+    background-color: red;
+    position: absolute;
+    right: 0;
+    bottom: 30px;
+    width: 50px;
+    height: 80px;
+
+}
+
+
+
+
+</style>
+
+</head>
+
+    <!-- <div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+        <div class="top"></div>
+        <div class="bottom"></div>
+    </div> -->
+
+    <!-- this is the blank template div for boxes and floors -->
+
+
+<body>
+    <div class="backdrop">
+        <div id="pete"></div>
+        <div class="rifle"></div>
+        <div class="boss1"></div>
+
+    <div class="ground">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+
+
+    <div class="box2">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="box3">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="box4">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="box5">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="box6">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="box7">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="box8">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="box9">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="box10">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="box11">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="box12">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="box13">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="box14">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="box15">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="box16">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="box17">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    
+    <div class="box18">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+
+
+
+    <div class="mill-floor1">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="mill-floor2">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="mill-floor3">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+    <div class="mill-floor4">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+
+    <div class="mill-wall1">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="wallL"></div>
+        <div class="wallR"></div>
+    </div>
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> 
+<script type="text/javascript">
+    
+    
+    const pete = $('#pete'),
+          backdrop = $('.backdrop'),
+          revolver = $('.revolver'),
+          leverAction = $('.lever-action'),
+          shotgun = $('.shotgun'),
+          rifle = $('.rifle'),
+          dir = {
+            up: false,
+            down: true,
+            left: false,
+            right: false
+            }
+            weapons = ['revolver'];
+
+    let gameRunning = false,
+        speed = 10,
+        jumping = 0,
+        leftspeed = 10,
+        rightspeed = 10, //pixels per frame
+        upspeed = 10,
+        downspeed = 10, 
+        //idea: put speeds in an object literal?
+        pHeight = 50,
+        pWidth = 27, 
+        stageH = 590, 
+        stageW = 1200; //we know the values for the player and the stage
+
+//event listeners
+$(document).keydown( function(e){
+    // if(e.which == 87){
+    //     dir.up = true;
+    // }
+
+    // if(e.which == 83){
+    //     dir.down = true;
+    // }
+    console.log(e.which);
+
+    if(e.which == 65 || e.which == 37){
+        dir.left = true;
+    }
+
+    if(e.which == 68 || e.which == 39){
+        dir.right = true;
+    }
+    
+    if(e.which == 32){ //spacebar key code
+            jumping = 1; //activates jump
+            if(i != false){
+                jump();
+                i = false;
+            }
+        };
+})
+
+    
+
+$(document).keyup( function(e){
+    // if(e.which == 87){
+    //     dir.up = false;
+    // }
+
+    // if(e.which == 83){
+    //     dir.down = false;
+    // }
+
+    if(e.which == 65 || e.which == 37){
+        dir.left = false;
+    }
+
+    if(e.which == 68 || e.which == 39){
+        dir.right = false;
+    }
+    // console.log(e.type, dir)
+
+})
+
+function gameLoop(){
+    let newTop = 0,
+        newLeft = 0;
+
+        if(dir.up){
+            newTop -= upspeed;
+            // console.log(newTop);
+        }
+        if(dir.down){
+            newTop += downspeed;
+        }
+        if(dir.left){
+            newLeft -= leftspeed;
+        }
+        if(dir.right){
+            newLeft += rightspeed;
+        }
+
+        let pTop = pete.position().top,
+            pLeft = pete.position().left;
+
+
+        if(pTop+newTop < 0){
+        newTop = 0;
+        newTop -= pTop;
+        }
+//console.log('total:', pLeft+newLeft);
+    if(pLeft+newLeft < 0){
+        newLeft = 0;
+        newLeft -= pLeft;
+//        console.log('total:', pLeft+newLeft)
+    }
+//    console.log(newLeft, pLeft);
+
+    if(pTop+newTop+pHeight > stageH){
+        newTop = 0;
+        newTop += (stageH-pHeight-pTop)
+    }
+    if(pLeft+newLeft+pWidth > stageW){
+        newLeft = 0;
+        newLeft += (stageW-pWidth-pLeft)
+    }
+
+//missing pete's css application
+  pete.css({top: '+=' + newTop, left: '+=' + newLeft});
+
+	backdrop.each(function(){
+		//this always happens. So these speeds always get set
+		if(recthit(pete, $(this))){
+			//console.log('backdrop');
+			//top 507
+			//stop left / right movement
+			leftspeed = 4;
+			rightspeed = 4;
+			downspeed = 6;
+		}
+	});
+	$('.wallL').each(function(){
+		if(recthit(pete, $(this))){
+			//console.log('wallL');
+			//stop left / right movement
+			// rightspeed = 0;
+			let currLeft = $(this).parent().position().left;
+			//.offset checks against the position of the element vs the document.
+			//currLeft = $(this).offset().left - $('.gameStage').offset().left;
+			$('#pete').css({left: currLeft - pWidth})
+		}
+	});
+	$('.wallR').each(function(){
+
+		if(recthit(pete, $(this))){
+			//console.log('wallR');
+			//stop left / right movement
+			// leftspeed = 0;
+//			currLeft = ($(this).offset().left) - $('.gameStage').offset().left;
+			let currLeft = $(this).parent().position().left;
+			$('#pete').css({left: currLeft})
+		}
+	});
+	$('.top').each(function(){
+		if(recthit(pete, $(this))){
+			//console.log('top'); 
+			//was at 507, this reset him to 476, a difference of 31px
+			//at 504 also gets reset to 476, 28px... Orrrrrr.... 14*2
+			//476, 490, 504
+			let currTopP = $(this).parent().position().top; //returns 560  
+			//position does not work here
+			//console.log(currTopP)
+			//console.log(dir);
+			//stop down
+			clearInterval(jumpInterval);
+			dir.up = false;
+			dir.down = true;
+			upspeed = 0;
+			jumping = 0;
+			i = true;
+//			console.log(dir,'upspeed:', upspeed, ' downspeed:',downspeed, player.position().top) //518
+			$('#pete').css({top: currTopP-pHeight})
+//			console.log(dir,'upspeed:', upspeed, ' downspeed:',downspeed, player.position().top) //476
+		}
+	});
+	$('.bottom').each(function(){
+		if(recthit(pete, $(this))){
+			//stop up
+			upspeed = 0;
+			//console.log('bottom');
+		}
+	});
+    $('.rifle').each( function(){
+        if(recthit(pete, $(this))){
+            $(this).remove();
+            weapons.push('rifle');
+            console.log(weapons);
+        }
+    });
+
+    $('.boss1').each( function(){
+        if(recthit(pete, $(this))){
+            //backdrop.text('');
+            urlParam = weapons.join('+')
+            console.log(urlParam);
+            console.log('start boss battle')
+            location.replace('bossBattle3.html?weapons='+urlParam);
+        }
+    });
+
+	 checkspeed();
+	//playersprite(); 
+
+	window.requestAnimationFrame(gameLoop);
+
+};// end game loop
+window.requestAnimationFrame(gameLoop);
+
+
+    //jump things
+    var jumpInterval;
+    var i = true;
+
+    function jumpspeed(){
+        upspeed = upspeed - 2;
+    };
+
+    function jump(){
+        dir.up = true;
+        dir.down = false;
+        upspeed = 12;
+        jumpInterval = setInterval(jumpspeed, 40);
+    }
+
+    $(document).keydown(function(e){
+
+    });
+
+    function checkspeed(){
+        //console.log( 'upspeed', upspeed);
+        if(upspeed <= 0){
+            clearInterval(jumpInterval);
+            upspeed = 0;
+            dir.down = true;
+            dir.up = false;
+            i = true;
+        }
+    }
+
+    let currFrame = 0;
+
+function peteWalking(){
+
+    const frames = [0,1,2,3,4,5];
+        frameWidth = 27;
+
+    let bgPosX = -(frameWidth * frames[currFrame]),
+        bgPosY = 0;
+
+    pete.css({'background-position': bgPosX+'px '+bgPosY+'px'});
+    currFrame++
+
+    if(currFrame == frames.length){
+			currFrame = 0;
+	}	
+}
+
+//setInterval(peteWalking, 1000/5);
+
+
+
+
+//hit detection
+function recthit(rectone, recttwo){
+    var r1 = $(rectone);
+    var r2 = $(recttwo);
+    
+    var r1x = r1.offset().left;
+    var r1w = r1.width();
+    var r1y = r1.offset().top;
+    var r1h = r1.height();
+    
+    var r2x = r2.offset().left;
+    var r2w = r2.width();
+    var r2y = r2.offset().top;
+    var r2h = r2.height();
+    
+    if( r1y+r1h < r2y ||
+        r1y > r2y+r2h ||
+        r1x > r2x+r2w ||
+        r1x+r1w < r2x ){
+    	//console.log('false');
+        return false;
+    }else{
+        return true;   
+    }
+    
+}//end function 
+
+
+
+
+
+
+</script>
+</body>
+</html>
+
+

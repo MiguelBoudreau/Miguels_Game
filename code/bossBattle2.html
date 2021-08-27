@@ -223,8 +223,6 @@ div.gun1{
 
 <div class="battle-backdrop1">
     <div class="screen">
-        <div class="pete"></div>
-        <div class="alien"></div>
         <!--characters to be displayed here -->
     </div>
     <div class="ui">
@@ -258,7 +256,7 @@ div.gun1{
 
           })
 
-          var turn = 'x';
+
 
     let gameRunning = false,
         speed = 10,
@@ -272,20 +270,7 @@ div.gun1{
         pWidth = 27, 
         stageH = 590, 
         stageW = 1200, //we know the values for the player and the stage
-        peteHP = 125;
         boss1HP = 100;
-        boss1HP = 125;
-        boss3HP = 150;
-
-
-
-        if(turn == 'x'){
-		    turn = 'o';
-            }else{
-                turn = 'x';
-            }
-
-
 
 $('.ui button').on( 'click', function(e){
         const button = $(this); //the button that got clicked:
@@ -330,7 +315,7 @@ $('.ui button').on( 'click', function(e){
                 //other potential guns go here and follow the same format:
 
                 case 'shotgun':
-                if(shotgunPerc){
+                if(gun1Perc){
                     console.log('player hit');
                     //set damage
                     damage = 75;
@@ -341,7 +326,7 @@ $('.ui button').on( 'click', function(e){
                 break;
 
                 case 'rifle':
-                if(riflePerc){
+                if(gun1Perc){
                     console.log('player hit');
                     //set damage
                     damage = 95;
@@ -352,24 +337,12 @@ $('.ui button').on( 'click', function(e){
                 break;
             } //end switch
 
-                case 'alien'
-
-
-
-            
              //which boss?
              boss1HP-=damage;
              console.log(boss1HP);
              if(boss1HP < 1){
                 alert('You beat him!');
-             }
-             
-             
-             peteHP-=damage;
-             console.log(peteHP);
-             if(peteHP < 1){
-                 alert('you lost! :(')
-             }
+             }   
 })
 
 function getUrlVars() {
