@@ -270,7 +270,6 @@ div.gun1{
         // rightspeed = 10, //pixels per frame
         // upspeed = 10,
         // downspeed = 10, 
-        // //idea: put speeds in an object literal?
         pHeight = 50,
         pWidth = 27, 
         stageH = 590, 
@@ -283,6 +282,9 @@ div.gun1{
 
 
 $('.ui button').on( 'click', function(e){
+    
+    if(turn == 'player'){
+        turn = 'boss';
         const button = $(this); //the button that got clicked:
         let randomPerc = getRandInt(1,100), //gets the percent that the user generates
             revolverPerc = 65 > randomPerc, 
@@ -352,15 +354,42 @@ $('.ui button').on( 'click', function(e){
              console.log(boss1HP);
              if(boss1HP < 1){
                 alert('You beat him!');
+             }else{
+                //boss is still alive and can return fire
+                setTimeout(bossFire, 2000);
              }
              
-             //this might have to be done in a different function, like a bossFire function.
-             peteHP-=damage;
+             //animate the bullet like the flame in the dragon game.       
+    }
+ 
+
+
+})
+
+
+function bossFire(){
+    console.log('boss fires....')
+    let boss1Damage = 50,
+        randomPerc = getRandInt(1,100), //gets the percent that the user generates
+            bossPerc = 55 > randomPerc; 
+
+            if(bossPerc){
+             peteHP-=boss1Damage;
+
+            }
              console.log(peteHP);
+             //tell user how many hp he has? 
+
              if(peteHP < 1){
                  alert('you lost! :(')
              }
-})
+
+             turn = 'player';
+             //we don't have to worry about an else because the user will take his turn in his own time. Maybe the user should be told to select his weapon.
+}
+
+
+
 
 function getUrlVars() {
     var vars = {};
