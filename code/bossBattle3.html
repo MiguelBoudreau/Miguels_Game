@@ -319,11 +319,11 @@ $('.ui button').on( 'click', function(e){
              boss1HP-=damage;
              console.log(boss1HP);
              if(boss1HP < 1){
-                alert('You beat him!')
+                alert('You escaped the alien invasion and beat the game!')
                 urlParam = weapons.join('+')
                 console.log(urlParam);
                 console.log('go forward to level 2')
-                location.replace('game2.html?weapons='+urlParam);
+                location.replace('game1.html?weapons='+urlParam);
              }else{
                 //boss is still alive and can return fire
                 setTimeout(bossFire, 2000);
